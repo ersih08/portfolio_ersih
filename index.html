@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portofolio — Ersih</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff0f7;
+            color: #4a2639;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* LOADER */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #fff0f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.5s;
+        }
+
+        .loader.hilang {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-bunga {
+            font-size: 60px;
+            animation: putar 1.5s infinite;
+        }
+
+        @keyframes putar {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(255,105,180,0.15);
+            transition: 0.5s;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e7549d;
+            transition: 0.5s;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: #6d3853;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: #e7549d;
+        }
+
+        /* TOMBOL MODE */
+        .theme-toggle {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #ffb6d9;
+            color: white;
+            font-size: 21px;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* BERANDA */
+        .home {
+            min-height: 100vh;
+            padding: 140px 7% 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f7,
+                    #ffe0ef,
+                    #ffd0e7
+                );
+
+            transition: 0.5s;
+        }
+
+        .konten-home {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .foto-box {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: auto;
+        }
+
+        .foto {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(255,80,160,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .lingkaran-putar {
+            position: absolute;
+            inset: -10px;
+            border: 3px dashed #ff69b4;
+            border-radius: 50%;
+            animation: putar 8s linear infinite;
+        }
+
+        .salam {
+            margin-top: 35px;
+            color: #d84b91;
+            font-weight: 600;
+        }
+
+        .nama {
+            font-size: 45px;
+            margin: 10px 0;
+            color: #d83f8c;
+        }
+
+        .info {
+            font-weight: 600;
+            color: #8d5470;
+        }
+
+        .deskripsi {
+            margin: 20px auto;
+            max-width: 650px;
+            line-height: 1.8;
+            color: #684358;
+        }
+
+        /* TOMBOL */
+        .tombol-baris {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-mewah {
+            background: #ed5ca3;
+            color: white;
+            box-shadow: 0 7px 20px rgba(237,92,163,0.3);
+        }
+
+        .btn-outline-bintang {
+            border: 2px solid #ed5ca3;
+            color: #d8428c;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* SOSIAL */
+        .sosial-atas {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .sosial-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            color: #e7549d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .sosial-link:hover {
+            transform: translateY(-5px);
+        }
+
+        /* SECTION */
+        .bagian {
+            padding: 90px 7%;
+            background: white;
+            transition: 0.5s;
+        }
+
+        .bagian.abu {
+            background: #fff4f9;
+        }
+
+        .sub-judul {
+            text-align: center;
+            color: #df5799;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .judul {
+            text-align: center;
+            font-size: 32px;
+            margin: 10px 0 45px;
+            color: #522c40;
+        }
+
+        /* GRID */
+        .bungkus {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 25px;
+        }
+
+        .bungkus-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+
+        .bungkus-grid-3 {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+
+        /* KARTU */
+        .kartu {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(226,84,145,0.1);
+            transition: 0.4s;
+        }
+
+        .kartu:hover {
+            transform: translateY(-7px);
+        }
+
+        .kartu h3 {
+            color: #d84b91;
+            margin-bottom: 20px;
+        }
+
+        .bintang-atas {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* BIODATA */
+        .data-baris {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5d9e7;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #d04b8c;
+        }
+
+        .isi {
+            text-align: right;
+        }
+
+        .teks-tentang {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* SKILL */
+        .skill-card {
+            text-align: center;
+        }
+
+        .skill-ikon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .baris-skill {
+            width: 100%;
+            height: 12px;
+            background: #f4dce8;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .isi-skill {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                #ff69b4,
+                #e83e91
+            );
+            border-radius: 20px;
+            font-size: 9px;
+            color: white;
+            text-align: right;
+            padding-right: 5px;
+            transition: width 1.5s ease;
+        }
+
+        /* PROYEK */
+        .proyek-card {
+            position: relative;
+        }
+
+        .proyek-ikon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .proyek-card h3 {
+            margin-top: 15px;
+        }
+
+        .proyek-card p {
+            line-height: 1.7;
+        }
+
+        .tanda {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .selesai {
+            background: #dff8e8;
+            color: #299653;
+        }
+
+        .proses {
+            background: #fff0c9;
+            color: #a77a00;
+        }
+
+        .nanti {
+            background: #eadfff;
+            color: #7042c7;
+        }
+
+        .tag {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag span {
+            background: #ffe0ee;
+            color: #d7438c;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        /* KONTAK */
+        .kontak-card {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .teks-kontak {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .sosmed-besar {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 15px;
+        }
+
+        .kotak-sosmed {
+            padding: 20px;
+            border-radius: 15px;
+            background: #fff0f7;
+            color: #d6438e;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .kotak-sosmed i {
+            font-size: 28px;
+        }
+
+        .kotak-sosmed:hover {
+            transform: translateY(-5px);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #ed5ca3;
+            color: white;
+            transition: 0.5s;
+        }
+
+        /* MODE MALAM */
+        body.dark-mode {
+            background: #061a33;
+            color: #eaf5ff;
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(5,22,45,0.95);
+            box-shadow: 0 3px 15px rgba(0,100,200,0.2);
+        }
+
+        body.dark-mode .logo {
+            color: #69bcff;
+        }
+
+        body.dark-mode .menu a {
+            color: #d9edff;
+        }
+
+        body.dark-mode .menu a:hover {
+            color: #69bcff;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #14558c;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,120,255,0.3);
+        }
+
+        body.dark-mode .home {
+            background:
+                linear-gradient(
+                    135deg,
+                    #061a33,
+                    #0a2b4d,
+                    #0d4770
+                );
+        }
+
+        body.dark-mode .salam {
+            color: #73c4ff;
+        }
+
+        body.dark-mode .nama {
+            color: #65baff;
+        }
+
+        body.dark-mode .info {
+            color: #bcdcff;
+        }
+
+        body.dark-mode .deskripsi {
+            color: #c8def2;
+        }
+
+        body.dark-mode .lingkaran-putar {
+            border-color: #55b8ff;
+        }
+
+        body.dark-mode .btn-mewah {
+            background: #1681d5;
+        }
+
+        body.dark-mode .btn-outline-bintang {
+            border-color: #59b8ff;
+            color: #7cc9ff;
+        }
+
+        body.dark-mode .sosial-link {
+            background: #10375b;
+            color: #71c2ff;
+        }
+
+        body.dark-mode .bagian {
+            background: #061a33;
+        }
+
+        body.dark-mode .bagian.abu {
+            background: #0a2745;
+        }
+
+        body.dark-mode .sub-judul {
+            color: #65bbff;
+        }
+
+        body.dark-mode .judul {
+            color: #eaf5ff;
+        }
+
+        body.dark-mode .kartu {
+            background: #103b63;
+            color: #eaf5ff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .kartu h3 {
+            color: #70c2ff;
+        }
+
+        body.dark-mode .data-baris {
+            border-color: rgba(150,200,255,0.15);
+        }
+
+        body.dark-mode .label {
+            color: #72c4ff;
+        }
+
+        body.dark-mode .baris-skill {
+            background: #1b4a70;
+        }
+
+        body.dark-mode .isi-skill {
+            background: linear-gradient(
+                90deg,
+                #168de0,
+                #64c7ff
+            );
+        }
+
+        body.dark-mode .tag span {
+            background: #155487;
+            color: #b4ddff;
+        }
+
+        body.dark-mode .kotak-sosmed {
+            background: #123f67;
+            color: #82caff;
+        }
+
+        body.dark-mode footer {
+            background: #04172d;
+        }
+
+        /* EMOJI MALAM */
+        body.dark-mode .emoji-siang {
+            display: none;
+        }
+
+        body.dark-mode .emoji-malam {
+            display: inline;
+        }
+
+        .emoji-malam {
+            display: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width:900px) {
+
+            .navbar {
+                padding: 12px 4%;
+            }
+
+            .menu {
+                gap: 10px;
+            }
+
+            .menu a {
+                font-size: 12px;
+            }
+
+            .bungkus-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .bungkus-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:600px) {
+
+            .navbar {
+                position: fixed;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .menu a {
+                font-size: 10px;
+            }
+
+            .theme-toggle {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+            }
+
+            .home {
+                padding-top: 180px;
+            }
+
+            .nama {
+                font-size: 32px;
+            }
+
+            .judul {
+                font-size: 25px;
+            }
+
+            .bungkus {
+                grid-template-columns: 1fr;
+            }
+
+            .bungkus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sosmed-besar {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .data-baris {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .isi {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div class="loader">
+        <div class="loader-bunga">
+            <span class="emoji-siang">🌸</span>
+            <span class="emoji-malam">🌙</span>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="emoji-siang">🌸</span>
+            <span class="emoji-malam">🌙</span>
+            Ersih.
+        </div>
+
+        <div class="menu">
+
+            <a href="#home">
+                <span class="emoji-siang">🏠</span>
+                <span class="emoji-malam">🌙</span>
+                Beranda
+            </a>
+
+            <a href="#about">
+                <span class="emoji-siang">💖</span>
+                <span class="emoji-malam">💙</span>
+                Tentang
+            </a>
+
+            <a href="#skills">
+                <span class="emoji-siang">✨</span>
+                <span class="emoji-malam">⭐</span>
+                Keahlian
+            </a>
+
+            <a href="#projects">
+                <span class="emoji-siang">🌷</span>
+                <span class="emoji-malam">🌌</span>
+                Proyek
+            </a>
+
+            <a href="#contact">
+                <span class="emoji-siang">💌</span>
+                <span class="emoji-malam">📨</span>
+                Kontak
+            </a>
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                aria-label="Ganti mode">
+                🌸
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- HOME -->
+    <section class="home" id="home">
+
+        <div class="konten-home">
+
+            <div class="foto-box">
+
+                <img
+                    src="image/profile.jpeg"
+                    alt="Ersih"
+                    class="foto">
+
+                <div class="lingkaran-putar"></div>
+
+            </div>
+
+            <p class="salam">
+
+                <span class="emoji-siang">
+                    🌷 Halo! Selamat Datang di Portofolio Saya 🌷
+                </span>
+
+                <span class="emoji-malam">
+                    🌙 Halo! Selamat Datang di Portofolio Saya ✨
+                </span>
+
+            </p>
+
+            <h1 class="nama">
+                Ersih
+            </h1>
+
+            <p class="info">
+                Siswa • XII RPL 1 • SMKN 1 Semparuk
+            </p>
+
+            <p class="deskripsi">
+
+                Saya Ersih, siswa jurusan
+                Rekayasa Perangkat Lunak yang sedang belajar
+                membuat website dan desain antarmuka.
+
+                <span class="emoji-siang">
+                    🌸 Hobi saya jajan 🍜 dan selalu semangat
+                    mencoba hal baru! 💖
+                </span>
+
+                <span class="emoji-malam">
+                    🌙 Saya senang belajar hal baru dan terus
+                    mengembangkan kemampuan saya. 💙✨
+                </span>
+
+            </p>
+
+            <div class="tombol-baris">
+
+                <a href="#about" class="btn btn-mewah">
+
+                    <span class="emoji-siang">🌸</span>
+                    <span class="emoji-malam">🌙</span>
+
+                    Kenalan Lebih Dekat
+
+                </a>
+
+                <a href="#projects"
+                   class="btn btn-outline-bintang">
+
+                    <span class="emoji-siang">🌷</span>
+                    <span class="emoji-malam">⭐</span>
+
+                    Lihat Karya Saya
+
+                </a>
+
+            </div>
+
+            <div class="sosial-atas">
+
+                <a href="#" class="sosial-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <a href="#" class="sosial-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#" class="sosial-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" class="sosial-link">
+                    <i class="fab fa-github"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="bagian" id="about">
+
+        <p class="sub-judul">
+
+            <span class="emoji-siang">💝</span>
+            <span class="emoji-malam">💙</span>
+
+            TENTANG SAYA
+
+        </p>
+
+        <h2 class="judul">
+
+            <span class="emoji-siang">
+                Siapa Saya? 💖
+            </span>
+
+            <span class="emoji-malam">
+                Siapa Saya? 💙
+            </span>
+
+        </h2>
+
+        <div class="bungkus">
+
+            <div class="kartu">
+
+                <div class="bintang-atas">
+
+                    <span class="emoji-siang">✨</span>
+                    <span class="emoji-malam">⭐</span>
+
+                </div>
+
+                <h3>
+
+                    <span class="emoji-siang">🌺</span>
+                    <span class="emoji-malam">🌙</span>
+
+                    Biodata Lengkap
+
+                </h3>
+
+                <div class="data-baris">
+                    <span class="label">🎀 Nama</span>
+                    <span class="isi">Ersih</span>
+                </div>
+
+                <div class="data-baris">
+                    <span class="label">🏫 Sekolah</span>
+                    <span class="isi">SMKN 1 Semparuk</span>
+                </div>
+
+                <div class="data-baris">
+                    <span class="label">💻 Jurusan</span>
+                    <span class="isi">Rekayasa Perangkat Lunak</span>
+                </div>
+
+                <div class="data-baris">
+                    <span class="label">📚 Kelas</span>
+                    <span class="isi">XII RPL 1</span>
+                </div>
+
+                <div class="data-baris">
+                    <span class="label">🍜 Hobi</span>
+                    <span class="isi">Jajan & Belajar Desain</span>
+                </div>
+
+            </div>
+
+            <div class="kartu">
+
+                <div class="bintang-atas">
+
+                    <span class="emoji-siang">✨</span>
+                    <span class="emoji-malam">⭐</span>
+
+                </div>
+
+                <h3>
+
+                    <span class="emoji-siang">💬</span>
+                    <span class="emoji-malam">💭</span>
+
+                    Tentang Diri
+
+                </h3>
+
+                <p class="teks-tentang">
+
+                    Saya adalah siswi yang ceria, lembut,
+                    dan penuh semangat belajar! 🌸
+
+                    Sedang menempuh pendidikan di
+                    SMKN 1 Semparuk jurusan RPL.
+
+                    Saya senang belajar membuat tampilan
+                    website yang cantik, rapi, dan nyaman dilihat.
+
+                </p>
+
+                <p class="teks-tentang">
+
+                    Dengan semangat yang tidak pernah padam,
+                    saya terus berusaha menjadi versi terbaik
+                    dari diri saya setiap hari!
+
+                    <span class="emoji-siang">🌸💖</span>
+                    <span class="emoji-malam">🌙💙</span>
+
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="bagian abu" id="skills">
+
+        <p class="sub-judul">
+
+            <span class="emoji-siang">✨</span>
+            <span class="emoji-malam">⭐</span>
+
+            KEMAMPUAN SAYA
+
+        </p>
+
+        <h2 class="judul">
+            Apa yang Telah Saya Pelajari? 📚
+        </h2>
+
+        <div class="bungkus-grid">
+
+            <div class="kartu skill-card">
+
+                <div class="skill-ikon">🌐</div>
+
+                <h3>HTML</h3>
+
+                <p>
+                    Membuat struktur halaman web
+                </p>
+
+                <div class="baris-skill">
+
+                    <div
+                        class="isi-skill"
+                        data-persen="85">
+                        85%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="kartu skill-card">
+
+                <div class="skill-ikon">🎨</div>
+
+                <h3>CSS</h3>
+
+                <p>
+                    Mempercantik tampilan web
+                </p>
+
+                <div class="baris-skill">
+
+                    <div
+                        class="isi-skill"
+                        data-persen="80">
+                        80%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="kartu skill-card">
+
+                <div class="skill-ikon">✏️</div>
+
+                <h3>Desain</h3>
+
+                <p>
+                    Mendesain tampilan antarmuka
+                </p>
+
+                <div class="baris-skill">
+
+                    <div
+                        class="isi-skill"
+                        data-persen="75">
+                        75%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="kartu skill-card">
+
+                <div class="skill-ikon">
+
+                    <span class="emoji-siang">💖</span>
+                    <span class="emoji-malam">💙</span>
+
+                </div>
+
+                <h3>Semangat Belajar</h3>
+
+                <p>
+                    Selalu ingin tahu hal baru
+                </p>
+
+                <div class="baris-skill">
+
+                    <div
+                        class="isi-skill"
+                        data-persen="95">
+                        95%
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROYEK -->
+    <section class="bagian" id="projects">
+
+        <p class="sub-judul">
+
+            <span class="emoji-siang">🌷</span>
+            <span class="emoji-malam">🌌</span>
+
+            KARYA SAYA
+
+        </p>
+
+        <h2 class="judul">
+            Proyek yang Telah Dibuat 📂
+        </h2>
+
+        <div class="bungkus-grid-3">
+
+            <div class="kartu proyek-card">
+
+                <div class="proyek-ikon">
+
+                    <span class="emoji-siang">🌸</span>
+                    <span class="emoji-malam">🌙</span>
+
+                </div>
+
+                <span class="tanda selesai">
+                    ✅ Selesai
+                </span>
+
+                <h3>
+                    Website Portofolio
+                </h3>
+
+                <p>
+                    Website pribadi dengan tema pink cerah,
+                    animasi elegan, dan desain yang lembut.
+                </p>
+
+                <div class="tag">
+
+                    <span>🌐 HTML</span>
+                    <span>🎨 CSS</span>
+
+                </div>
+
+            </div>
+
+            <div class="kartu proyek-card">
+
+                <div class="proyek-ikon">
+
+                    <span class="emoji-siang">🏫</span>
+                    <span class="emoji-malam">🏢</span>
+
+                </div>
+
+                <span class="tanda proses">
+                    📖 Belajar
+                </span>
+
+                <h3>
+                    Halaman Profil Sekolah
+                </h3>
+
+                <p>
+                    Membuat halaman profil SMKN 1 Semparuk
+                    dengan tampilan yang informatif dan menarik.
+                </p>
+
+                <div class="tag">
+
+                    <span>🌐 HTML</span>
+                    <span>🎨 CSS</span>
+
+                </div>
+
+            </div>
+
+            <div class="kartu proyek-card">
+
+                <div class="proyek-ikon">
+
+                    <span class="emoji-siang">✨</span>
+                    <span class="emoji-malam">🌟</span>
+
+                </div>
+
+                <span class="tanda nanti">
+                    🌺 Akan Datang
+                </span>
+
+                <h3>
+                    Proyek Selanjutnya
+                </h3>
+
+                <p>
+                    Akan membuat karya yang lebih keren
+                    dengan fitur interaktif yang lebih menarik!
+                </p>
+
+                <div class="tag">
+
+                    <span>🌸 Belajar</span>
+                    <span>✨ Terus</span>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section class="bagian abu" id="contact">
+
+        <p class="sub-judul">
+
+            <span class="emoji-siang">💌</span>
+            <span class="emoji-malam">📨</span>
+
+            HUBUNGI SAYA
+
+        </p>
+
+        <h2 class="judul">
+
+            <span class="emoji-siang">
+                Mari Berteman & Saling Mengenal! 💖
+            </span>
+
+            <span class="emoji-malam">
+                Mari Berteman & Saling Mengenal! 💙
+            </span>
+
+        </h2>
+
+        <div class="kartu kontak-card">
+
+            <p class="teks-kontak">
+
+                <span class="emoji-siang">
+
+                    💡 Nanti kamu bisa menambahkan nomor WhatsApp,
+                    Instagram, Facebook, dan GitHub agar orang lain
+                    lebih mudah menghubungi kamu! 💖🌸
+
+                </span>
+
+                <span class="emoji-malam">
+
+                    💡 Hubungi saya melalui media sosial dan mari
+                    saling mengenal! 💙🌙✨
+
+                </span>
+
+            </p>
+
+            <div class="sosmed-besar">
+
+                <a href="#" class="kotak-sosmed">
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                </a>
+
+                <a href="#" class="kotak-sosmed">
+
+                    <i class="fab fa-instagram"></i>
+
+                    <span>
+                        Instagram
+                    </span>
+
+                </a>
+
+                <a href="#" class="kotak-sosmed">
+
+                    <i class="fab fa-facebook-f"></i>
+
+                    <span>
+                        Facebook
+                    </span>
+
+                </a>
+
+                <a href="#" class="kotak-sosmed">
+
+                    <i class="fab fa-github"></i>
+
+                    <span>
+                        GitHub
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+
+            <span class="emoji-siang">
+                🌸 Dibuat dengan sepenuh hati — Ersih 🌸
+            </span>
+
+            <span class="emoji-malam">
+                🌙 Dibuat dengan sepenuh hati — Ersih ✨
+            </span>
+
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        /* LOADER */
+        window.addEventListener("load", function() {
+
+            document
+                .querySelector(".loader")
+                .classList.add("hilang");
+
+        });
+
+        /* MODE SIANG / MALAM */
+
+        const themeToggle =
+            document.getElementById("themeToggle");
+
+        const modeTersimpan =
+            localStorage.getItem("theme");
+
+        if (modeTersimpan === "dark") {
+
+            document.body.classList.add("dark-mode");
+
+            themeToggle.textContent = "🌙";
+
+        } else {
+
+            themeToggle.textContent = "🌸";
+
+        }
+
+        themeToggle.addEventListener("click", function() {
+
+            document.body.classList.toggle("dark-mode");
+
+            if (
+                document.body.classList.contains("dark-mode")
+            ) {
+
+                themeToggle.textContent = "🌙";
+
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+
+            } else {
+
+                themeToggle.textContent = "🌸";
+
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+
+            }
+
+        });
+
+        /* ANIMASI SKILL */
+
+        const garisSkill =
+            document.querySelectorAll(".isi-skill");
+
+        function cekSkill() {
+
+            garisSkill.forEach(function(el) {
+
+                const posisi =
+                    el.getBoundingClientRect();
+
+                if (
+                    posisi.top <
+                    window.innerHeight - 80
+                ) {
+
+                    const persen =
+                        el.getAttribute("data-persen");
+
+                    el.style.width =
+                        persen + "%";
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener(
+            "scroll",
+            cekSkill
+        );
+
+        cekSkill();
+
+    </script>
+
+</body>
+</html>
